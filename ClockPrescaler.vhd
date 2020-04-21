@@ -3,15 +3,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use ieee.std_logic_unsigned.all;
 
-entity main is
+entity ClockPrecaler is
     port (
         CLK100MHZ : in  std_logic;
         LEDS      : out std_logic_vector(7 downto 0);
         rst       : in  std_logic
     );
-end main;
+end ClockPrecaler;
 
-architecture Behavioral of main is
+architecture Behavioral of ClockPrecaler is
     signal prescaler : std_logic_vector (27 downto 0);
     signal clk_2Hz_i : std_logic;
 begin
