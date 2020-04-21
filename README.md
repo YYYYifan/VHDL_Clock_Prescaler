@@ -10,7 +10,9 @@ $$ Time = 1 / Frequency $$
 
 $a + b$
 
-<img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large Time = 1 / Frequency" style="border:none;">
+
+<img src="http://chart.googleapis.com/chart?cht=tx&chl= Time = 1 / Frequency" style="border:none;">
+
 
 we use a prescaler/counter to calculate how many frequency.
 
