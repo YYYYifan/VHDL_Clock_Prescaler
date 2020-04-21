@@ -37,7 +37,7 @@ entity main is
 end main;
 
 architecture Behavioral of main is
-    signal prescaler : std_logic_vector (27 downto 0); -- 50 000 000 in binary have 26 bits
+    signal prescaler : std_logic_vector (25 downto 0); -- 50 000 000 in binary have 26 bits
     signal clk_1Hz : std_logic;
 begin
     process (CLK100MHZ, rst)
