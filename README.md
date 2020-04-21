@@ -16,7 +16,7 @@ if we want create 1Hz
 
  we need to use create frequency devide by 2, because there has positive and negative in one cycle.
 
-<img src="http://chart.googleapis.com/chart?cht=tx&chl= HalfFrequency = CreateFrequency / 2 = 100 000 000/2 = 50 000 000" style="border:none;">
+<img src="http://chart.googleapis.com/chart?cht=tx&chl= HalfFrequency = CreateFrequency / 2 = 100 000 000/2 = 50 000 000Hz" style="border:none;">
 
 So, its mean when prescaler/counter is equal to 50 000 000, we change the "create frequency" e.g: Positive -> Negative
 
@@ -29,7 +29,7 @@ begin  -- process
         clk_1Hz   <= '0';
         prescaler   <= (others => '0');
     elsif rising_edge(CLK100MHZ) then   -- rising clock edge
-        if prescaler = X"2faf080" then     -- 17d7840 <-> 25 000 000 in hex ! we need 50 hz
+        if prescaler = X"2faf080" then     -- 2faf080 <-> 50 000 000 in hex
             prescaler   <= (others => '0');
             clk_1Hz   <= not clk_1Hz;
         else
