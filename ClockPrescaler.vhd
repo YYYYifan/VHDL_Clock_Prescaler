@@ -5,35 +5,29 @@ use ieee.std_logic_unsigned.all;
 
 entity ClockPrecaler is
     port (
-        CLK100MHZ : in  std_logic;
-        LEDS      : out std_logic_vector(7 downto 0);
-        rst       : in  std_logic
+        CLK100MHZ : in  std_logic;        
+        RESET_N   : in  std_logic
     );
 end ClockPrecaler;
 
 architecture Behavioral of ClockPrecaler is
-    signal prescaler : std_logic_vector (27 downto 0); -- decimal 50 000 000 in binary is 26 bits
-    signal clk_1Hz_i : std_logic;
+    signal counter  : std_logic_vector (27 downto 0); -- decimal 50 000 000 in binary is 26 bits
+    signal CLK100Hz : std_logic;
 begin
-    process (CLK100MHZ, rst)
-    -- 1 Second = 1 / frequency(Hz)
-    -- so, if we need 1hz, "NEXYS 4 DDR" main frequency is 100Mhz
-    -- its positive and negative in one cycle
-    -- our precaler is 100 000 000 / 2 = 50 000 000
-    begin  -- process gen_clk
-        if rst = '1' then
-            clk_1Hz_i   <= '0';
-            prescaler   <= (others => '0');
+
+    process(CLK100MHZ, RESET_N)
+    begin
+        if RESET_N = '1' then
+            CLK100Hz <= '0';
+            counter <= (others => '0');     -- clear counter
         elsif rising_edge(CLK100MHZ) then   
-            if prescaler = X"2faf080" then      -- change here to change clock, 500 000 000 in hex is 2faf080
-                prescaler   <= (others => '0');
-                clk_1Hz_i   <= not clk_1Hz_i;
+            if counter = X"7A120" then      -- 500000 in hex
+                counter <= (others => '0');
+                CLK100Hz <= not CLK100Hz;
             else
-                prescaler <= prescaler + "1";
+                counter <= counter + "1";
             end if;
         end if;
-    end process
-      
-    LEDS(7 downto 1) <= (others => '0');
-    LEDS(0) <= clk_1Hz_i;
+    end process;
+
 end Behavioral;
